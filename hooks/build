@@ -1,0 +1,8 @@
+#!/bin/bash
+
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo Build date: $BUILD_DATE
+echo Commit: $SOURCE_COMMIT
+
+docker build --build-arg BUILD_DATE=$BUILD_DATE --build-arg SOURCE_COMMIT=$SOURCE_COMMIT -f $DOCKERFILE_PATH -t $IMAGE_NAME .

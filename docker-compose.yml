@@ -1,0 +1,8 @@
+version: '3.6'
+services:
+  jupyter:
+    image: forinil/pythia-eic-tutorial:latest
+    ports:
+     - "8888:8888"
+    volumes:
+      - ./code:/code

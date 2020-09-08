@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILD_DATE="now"
+        - SOURCE_COMMIT="head"
+    image: forinil/pythia-eic-tutorial:latest
+    ports:
+     - "8888:8888"
+    volumes:
+      - ./code:/code
