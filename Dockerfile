@@ -1,10 +1,10 @@
 FROM alpine:latest AS builder
 
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY runJupyter.sh /usr/local/bin/runJupyter.sh
 RUN apk add --virtual .dos2unix dos2unix && \
-    dos2unix /usr/local/bin/entrypoint.sh && \
+    dos2unix /usr/local/bin/runJupyter.sh && \
     apk del .dos2unix && \
-    chmod +x /usr/local/bin/entrypoint.sh
+    chmod +x /usr/local/bin/runJupyter.sh
 
 FROM electronioncollider/pythia-eic-tutorial:latest
 
@@ -20,6 +20,6 @@ LABEL maintainer="Konrad Botor (kbotor@gmail.com)" \
       org.label-schema.vendor="Konrad Botor" \
       org.label-schema.version="1.0" \
       org.label-schema.schema-version="1.0"
-COPY --from=builder /usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --from=builder /usr/local/bin/runJupyter.sh /usr/local/bin/runJupyter.sh
 
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+CMD ["/bin/sh" "-c" "/usr/local/bin/runJupyter.sh"]
